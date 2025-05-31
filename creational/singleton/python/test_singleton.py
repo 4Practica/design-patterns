@@ -1,4 +1,4 @@
-from .app import GlobalCounter
+from .global_counter import GlobalCounter
 
 def test_global_counter():
     counter1 = GlobalCounter()
