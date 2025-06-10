@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.Metrics;
-
-namespace Singleton.Core;
+﻿namespace Singleton.Core;
 
 public class GlobalCounter
 {
     public static GlobalCounter? Instance;
-    public Dictionary<string, int> Counters = new();
+    private Dictionary<string, int> Counters = new();
 
 
     private GlobalCounter() { }
@@ -16,24 +14,51 @@ public class GlobalCounter
         return Instance;
     }
 
-    public static void ResetInstance() { }
-
-    public int Increment(string counterName)
+    public static void ResetInstance()
     {
-        return 0;
+        Instance = null;
     }
+
     public int GetValue(string counterName)
     {
-        return 0;
+        return Counters.TryGetValue(counterName, out int value) ? value : 0;
     }
-    public int Decrement(string counterName)
+
+    public void InitializeCounter(string counterName)
     {
-        return 0;
+        int value = GetValue(counterName);
+        if (value == 0)
+            Counters.Add(counterName, 0);
     }
-    public int Reset(string counterName = "")
+
+    public void Increment(string counterName)
     {
-        return 0;
+        InitializeCounter(counterName);
+        Counters[counterName]++;
     }
+
+    public void Decrement(string counterName)
+    {
+        InitializeCounter(counterName);
+        Counters[counterName]--;
+    }
+
+    public void Reset(string counterName = "")
+    {
+        int value = GetValue(counterName);
+        if (value == 0 || string.IsNullOrEmpty(counterName))
+        {
+            foreach (var key in Counters.Keys.ToList())
+            {
+                Counters[key] = 0;
+            }
+        }
+        else
+        {
+            Counters[counterName] = 0;
+        }
+    }
+
     public Dictionary<string, int> ListCounters()
     {
         return Counters;
