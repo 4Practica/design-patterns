@@ -1,0 +1,10 @@
+[tool.pyright]
+include = [
+    "jobs",
+]
+typeCheckingMode = "strict"
+reportUnnecessaryIsInstance = false
+reportUnusedImport = "warning"
+reportUnusedVariable = "warning"
+reportUnusedFunction = "warning"
+reportUnusedExpression = "warning"
