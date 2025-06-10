@@ -1,7 +1,3 @@
-// Archivo: GlobalCounterTests.cs
-using Xunit;
-using System.Collections.Generic; // Para Dictionary
-using System.Linq;
 using Singleton.Core; // Para ToDictionary
 
 public class GlobalCounterTests
@@ -31,6 +27,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldReturnSameInstanceWhenCreatedMultipleTimes()
         {
+            GlobalCounter.ResetInstance();
             var counter1 = GlobalCounter.GetInstance();
             var counter2 = GlobalCounter.GetInstance();
 
@@ -40,6 +37,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldShareStateBetweenInstances()
         {
+            GlobalCounter.ResetInstance();
             var counter1 = GlobalCounter.GetInstance();
             var counter2 = GlobalCounter.GetInstance();
 
@@ -58,6 +56,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldIncrementCounterBy1()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -70,6 +69,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldCreateNewCounterIfItDoesNotExist()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("newCounter");
@@ -79,6 +79,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldHandleMultipleDifferentCounters()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -100,6 +101,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldDecrementCounterBy1()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -112,6 +114,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldCreateCounterWith0AndDecrementToMinus1()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Decrement("newCounter");
@@ -129,6 +132,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldResetSpecificCounterTo0()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -141,6 +145,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldResetAllCountersWhenNoNameProvided()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -162,6 +167,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldReturnCurrentValueOfCounter()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -173,6 +179,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldReturn0ForNonExistingCounter()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             Assert.Equal(0, counter.GetValue("nonExistent"));
@@ -189,6 +196,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldReturnEmptyObjectWhenNoCountersExist()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             Assert.Empty(counter.ListCounters());
@@ -198,6 +206,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldReturnAllCountersWithTheirValues()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             counter.Increment("visits");
@@ -233,6 +242,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldWorkCorrectlyWithMixedOperations()
         {
+            GlobalCounter.ResetInstance();
             var counter = GlobalCounter.GetInstance();
 
             // Crear varios contadores
@@ -256,6 +266,7 @@ public class GlobalCounterTests
         [Fact]
         public void ShouldMaintainStateAcrossDifferentInstances()
         {
+            GlobalCounter.ResetInstance();
             var counter1 = GlobalCounter.GetInstance();
             var counter2 = GlobalCounter.GetInstance();
 
