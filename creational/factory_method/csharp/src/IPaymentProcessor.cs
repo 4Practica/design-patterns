@@ -1,7 +1,7 @@
-public interface IPaymentProcessor
+public interface IPaymentProcessor<T> where T : PaymentData
 {
-    bool ValidateData(Dictionary<string, string> paymentData);
+    bool ValidateData(T paymentData);
     double CalculateCommission(double amount);
-    Dictionary<string, object> ProcessPayment(object paymentData);
-    string GenerateReceipt(object paymentData);
+    PaymentResult ProcessPayment(T paymentData);
+    string GenerateReceipt(T paymentData);
 }

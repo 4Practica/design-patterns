@@ -2,7 +2,7 @@
 
 public class PaymentFactory
 {
-    private static readonly Dictionary<PaymentMethod, Func<IPaymentProcessor>> _paymentProcessors = new()
+    private static readonly Dictionary<PaymentMethod, Func<object>> _paymentProcessors = new()
     {
         { PaymentMethod.CreditCard, () => new CreditCardProcessor() },
         { PaymentMethod.PayPal, () => new PayPalProcessor() },
@@ -10,9 +10,9 @@ public class PaymentFactory
         { PaymentMethod.DigitalWallet, () => new DigitalWalletProcessor() }
     };
 
-    public static IPaymentProcessor CreatePaymentMethod(PaymentMethod method)
+    public static object CreatePaymentMethod(PaymentMethod method)
     {
-        if (_paymentProcessors.TryGetValue(method, out Func<IPaymentProcessor>? processorFactory))
+        if (_paymentProcessors.TryGetValue(method, out Func<object>? processorFactory))
         {
             return processorFactory();
         }
