@@ -251,7 +251,8 @@ namespace FactoryMethod.Tests
             var paymentData = new DigitalWalletData
             {
                 WalletId = "WALLET123",
-                Amount = 100.0
+                Amount = 100.0,
+                PhoneNumber = "+1234567890"
             };
             var result = processor.ProcessPayment(paymentData);
             Assert.True(result.Success);
